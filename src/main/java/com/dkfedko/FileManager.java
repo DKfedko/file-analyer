@@ -1,13 +1,24 @@
 package com.dkfedko;
 
 import java.io.File;
-import java.nio.file.Path;
+
 
 public class FileManager {
 
     public static int countFiles(String path) {
-        FileAnalyzer directory = new FileAnalyzer(path);
+        String pathToFile = new String(path) ;
+        int filesCount;
+
 
         return 0;
     }
+    public static int countDirs(String path){
+
+        return 0;
+    }
+    public static void copy(String from, String to){
+
+
+    }
+
 }
