@@ -1,9 +1,10 @@
 package com.dkfedko;
 import java.io.*;
+import java.util.ArrayList;
 
-public class FileAnalyzer {
+public class FileAnalyzer<T> {
 
-    public static void main(String[] args) throws IOException {
+    public void main(String[] args) throws IOException {
 
         String filePath = "/home/dkfedko/Стільниця/story.txt";
         String searchedWord = "duck";
@@ -15,16 +16,43 @@ public class FileAnalyzer {
         System.out.println();
 
         try {
-            String line;
-            int wordCount = 0;
+            char sentences;
+            int searchedWordCounts = 0;
+            ArrayList<T> sentencesList = new ArrayList<>();
 
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
+//            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
 
-            while ((line = bufferedReader.readLine()) != null) {
-                if (line.contains(searchedWord)){
-                    System.out.println(searchedWord);
+            try
+                    (FileReader fileReader = new FileReader(filePath)) {
+                while ((sentences = (char) fileReader.read())!= -1) {
+                    String senctences;
+                    if (senctences.endsWith(".") || sentences.endsWith("?") || sentences.endsWith("!")) {
+                        sentencesList.add((T) sentences);
+                        if (sentences.contains(searchedWord)) {
+                            String[] words = sentences.split("[\\s.,!?]+");
+                            for (String word : words) {
+                                if (word.equals(searchedWord)) ;
+                                searchedWordCounts++;
+                                System.out.println(searchedWordCounts);
+                            }
+                        }
+                    }
                 }
-                }
+            }
+
+//            while ((line = bufferedReader.readLine()) != null) {
+//                if (line.endsWith(".") || line.endsWith("?") || line.endsWith("!")) {
+//                    sentencesList.add(line);
+//                }
+//            }
+//            if (line.contains(searchedWord)) {
+//                String[] words = line.split("[\\s.,!?]+");
+//                for (String word : words) {
+//                    if (word.equals(searchedWord)) ;
+//                    searchedWordCounts++;
+//                    System.out.println(searchedWordCounts);
+//                }
+//            }
         } catch (FileNotFoundException exception) {
             System.out.println("can't find file");
 
