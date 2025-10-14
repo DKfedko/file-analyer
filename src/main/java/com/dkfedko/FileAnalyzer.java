@@ -9,6 +9,9 @@ public class FileAnalyzer<T> {
         String filePath = "/home/dkfedko/Стільниця/story.txt";
         String searchedWord = "duck";
 
+        int searchedWordCounts = 0;
+        ArrayList<String> sentencesList = new ArrayList<>();
+
         File file = new File(filePath);
         System.out.println(file.getAbsoluteFile());
         System.out.println(file.getName());
@@ -16,23 +19,21 @@ public class FileAnalyzer<T> {
         System.out.println();
 
         try {
-            char sentences;
-            int searchedWordCounts = 0;
-            ArrayList<T> sentencesList = new ArrayList<>();
 
 //            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
 
             try
                     (FileReader fileReader = new FileReader(filePath)) {
-                while ((sentences = (char) fileReader.read())!= -1) {
-                    String senctences;
-                    if (senctences.endsWith(".") || sentences.endsWith("?") || sentences.endsWith("!")) {
+                while (fileReader.read() != -1) {
+
+                    if (sentences. (".") || sentences.endsWith("?") || sentences.endsWith("!")){
                         sentencesList.add((T) sentences);
                         if (sentences.contains(searchedWord)) {
                             String[] words = sentences.split("[\\s.,!?]+");
                             for (String word : words) {
-                                if (word.equals(searchedWord)) ;
-                                searchedWordCounts++;
+                                if (word.equalsIgnoreCase(searchedWord)) {
+                                    searchedWordCounts++;
+                                }
                                 System.out.println(searchedWordCounts);
                             }
                         }
@@ -52,7 +53,6 @@ public class FileAnalyzer<T> {
 //                    searchedWordCounts++;
 //                    System.out.println(searchedWordCounts);
 //                }
-//            }
         } catch (FileNotFoundException exception) {
             System.out.println("can't find file");
 
