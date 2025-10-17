@@ -7,16 +7,17 @@ import java.util.Locale;
 
 public class StringSample {
     public static void main(String[] args) {
-        String testedString = "  This is tested string, checking Methods! Test, test.  ";
 
+        String testedString = "  This is tested string, checking Methods! Test, test.  ";
         String filePath = "/home/dkfedko/Стільниця/story.txt";
 
         System.out.println(testedString.trim().toLowerCase(Locale.ROOT));
+
         String[] elementsOfTestedString = testedString.split("[\\s.,!?]+");
         for (String elements : elementsOfTestedString) {
             System.out.println(elements);
         }
-        System.out.println();
+
         System.out.println(testedString.endsWith(" "));
         System.out.println(testedString.endsWith("!"));
         System.out.println(Arrays.toString(testedString.getBytes(StandardCharsets.UTF_8)));
