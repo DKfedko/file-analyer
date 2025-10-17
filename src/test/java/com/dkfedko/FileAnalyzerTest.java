@@ -25,5 +25,16 @@ public class FileAnalyzerTest {
         assertEquals(4, actual);
 
     }
+    @Test
+    void shouldCopyFiles(){
+
+
+    }
+    @Test
+    void shouldMoveFiles(){
+
+
+
+    }
 
 }
