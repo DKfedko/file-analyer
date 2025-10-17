@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 
 public class FileManager {
 
-
     public static int countFiles(String path) throws FileNotFoundException {
         File file = new File(path);
         int totalFilesCount = 0;
@@ -38,7 +37,6 @@ public class FileManager {
     }
 
     public static void copy(String from, String to) {
-
 
     }
 
