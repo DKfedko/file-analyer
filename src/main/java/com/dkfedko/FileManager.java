@@ -9,6 +9,7 @@ public class FileManager {
     public static int countFiles(String path){
         File file = new File(path);
         int totalFilesCount = 0;
+
         try {
             File[] files = file.listFiles();
             if (files == null) {
@@ -17,6 +18,8 @@ public class FileManager {
             for (File f : files) {
                 if (f.isFile()) {
                     totalFilesCount++;
+                }else if (f.isDirectory()){
+                    totalFilesCount+=countFiles(f.getAbsolutePath());
                 }
             }
             return totalFilesCount;
@@ -39,6 +42,8 @@ public class FileManager {
             for (File f : Folders) {
                 if (f.isDirectory()) {
                     totalFoldersCounts++;
+                }else if (f.isDirectory()){
+                    totalFoldersCounts+=countFolders(f.getAbsolutePath());
                 }
             }
             return totalFoldersCounts;
