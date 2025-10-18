@@ -6,13 +6,13 @@ import java.util.Arrays;
 public class IOStreamsSample {
     public static void main(String[] args) throws IOException {
 
-            String inputFilePath = "/home/dkfedko/Стільниця/input output steam folder/inputfolder/CV.txt";
-            String outputFilePath = "/home/dkfedko/Стільниця/input output steam folder/outputfolder/Новий документ";
-try {
+        String inputFilePath = "/home/dkfedko/Стільниця/input output steam folder/inputfolder/CV.txt";
+        String outputFilePath = "/home/dkfedko/Стільниця/input output steam folder/outputfolder/Новий документ";
+        try {
             FileInputStream inputStream = new FileInputStream(inputFilePath);
             FileOutputStream outputStream = new FileOutputStream(outputFilePath);
             {
-                System.out.println("reading file =  "+inputStream.read()+ " bytes");
+                System.out.println("reading file =  " + inputStream.read() + " bytes");
                 System.out.println("bytes available " + inputStream.available() + " for reading");
 
 //                System.out.println(Arrays.toString(inputStream.readNBytes(100)));
@@ -29,7 +29,7 @@ try {
 
                 outputStream.write(data);
                 System.out.println("wrote same byte length as inputStream.ReadNBytes, bytes: " + data.length);
-                
+
 
             }
         } catch (FileNotFoundException e) {
