@@ -26,7 +26,7 @@ public class FileManagerTest {
 
     }
     @Test
-    void shouldCopyFiles(){
+    void shouldCopyFilesByIO(){
 
 //        File from = new File(String from);
 //        File to = new File(String to);

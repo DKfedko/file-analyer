@@ -1,51 +1,88 @@
 package com.dkfedko;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class FileManager {
 
-    public static int countFiles(String path) throws FileNotFoundException {
+    public static int countFiles(String path){
         File file = new File(path);
         int totalFilesCount = 0;
-
-        File[] files = file.listFiles();
-        if (files == null) {
-            throw new FileNotFoundException();
-        }
-        for (File f : files)
-            if (f.isFile()) {
-                totalFilesCount++;
+        try {
+            File[] files = file.listFiles();
+            if (files == null) {
+                throw new FileNotFoundException("Can't find file" + path);
             }
-        return totalFilesCount;
+            for (File f : files) {
+                if (f.isFile()) {
+                    totalFilesCount++;
+                }
+            }
+            return totalFilesCount;
+        } catch (FileNotFoundException e) {
+            System.out.println("can't find file" + path);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
     }
 
-    public static int countFolders(String path) throws FileNotFoundException {
+    public static int countFolders(String path){
         File folder = new File(path);
         int totalFoldersCounts = 0;
-
-        File[] files = folder.listFiles();
-        if (files == null) {
-            throw new FileNotFoundException();
-        }
-        for (File f : files) {
-            if (f.isDirectory()) {
-                totalFoldersCounts++;
+        try {
+            File[] Folders = folder.listFiles();
+            if (Folders == null) {
+                throw new FileNotFoundException("Can't find folder");
             }
+            for (File f : Folders) {
+                if (f.isDirectory()) {
+                    totalFoldersCounts++;
+                }
+            }
+            return totalFoldersCounts;
+        } catch (FileNotFoundException e) {
+            System.out.println("can't find folder");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return totalFoldersCounts;
+        return 0;
     }
 
-    public static void copy(String from, String to) {
-
+    public static void move(String from, String to) throws IOException {
+        try {
+            String pathFrom = from;
+            String pathTo = to;
+            Files.move(Path.of(pathFrom), Path.of(pathTo));
+        } catch (FileNotFoundException e){
+            System.out.println("can't find file");
+        }
     }
 
-    public static void move(String from, String to) {
-        File mover = new File(from, to);
+    public static void copy(String from, String to) throws IOException {
+        try {
+        String pathFrom = from;
+        String pathTo = to;
+        Files.copy(Path.of(pathFrom), Path.of(pathTo));
+        } catch (FileNotFoundException e){
+            System.out.println("can't find file");
+        }
+    }
 
-        String path = "";
-        from = path;
-        to = new String(path);
-
+    public static void copyByIO(String from, String to) throws IOException {
+        try {
+            FileInputStream inputStream = new FileInputStream(from);
+            FileOutputStream outputStream = new FileOutputStream(to);
+            {
+                int d;
+                while ((d = inputStream.read()) != -1) {
+                    outputStream.write(d);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("can't find file");
+        }
     }
 }
+
