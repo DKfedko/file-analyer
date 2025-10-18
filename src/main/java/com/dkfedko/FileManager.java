@@ -79,12 +79,10 @@ public class FileManager {
         try {
             FileInputStream inputStream = new FileInputStream(from);
             FileOutputStream outputStream = new FileOutputStream(to);
-            {
                 int d;
                 while ((d = inputStream.read()) != -1) {
                     outputStream.write(d);
                 }
-            }
         } catch (FileNotFoundException e) {
             System.out.println("can't find file");
         }
