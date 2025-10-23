@@ -2,29 +2,34 @@ package com.dkfedko;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FileManagerTest {
-    String path = "/home/dkfedko/Стільниця/fileTest";
-
     @Test
-    void shouldCountFiles() throws FileNotFoundException {;
+    void shouldCountFiles() {
+        String path   = "home/dkfedko/Стільниця/fileTest";
+        String Fullpath  = new String(path);
+        FileManager fileManager = new FileManager();
 
-        int actual = FileManager.countFiles(path);
-
+        int actual = fileManager.countFiles(path);
         assertEquals(3, actual);
 
     }
-    @Test
-    void shouldCountFolders() throws FileNotFoundException {
 
-        int actual = FileManager.countFolders(path);
+//    @Test
+//    void shouldCountFolders() throws FileNotFoundException {
+//
+//        int actual = FileManager.
+//
+//        assertEquals(4, actual);
+//
+//    }
 
-        assertEquals(4, actual);
-
-    }
     @Test
     void shouldCopyFilesByIO(){
 

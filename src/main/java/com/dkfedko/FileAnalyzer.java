@@ -1,34 +1,79 @@
 package com.dkfedko;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
-public class FileAnalyzer {
-    public static void main(String[] agrs) {
+public class FileAnalyzer implements FilesAnalyzer {
 
-        String filePath = "/home/dkfedko/Стільниця/story.txt";
-        String searchedWord = "duck";
-        int searchedWordCounts = 0;
-        ArrayList<String> sentencesList = new ArrayList<>();
-
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                if (line.endsWith(".") || line.endsWith("?") || line.endsWith("!")) {
-                    sentencesList.add(line);
-                    String[] words = line.split("[\\s.,!?]+");
-                        for (String word : words) {
-                            if (word.equalsIgnoreCase(searchedWord)) {
-                                searchedWordCounts++;
-                                System.out.println(searchedWordCounts);
-                        }
-                    }
-                }
-            }
+    @Override
+    public String readContent(String path) {
+        try (FileInputStream input = new FileInputStream(path)) {
+            byte[] data = input.readAllBytes();
+            return new String(data);
         } catch (FileNotFoundException e) {
-            System.out.println("can't find file");
+            throw new RuntimeException("can't find file: " + path, e);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't read file: " + path, e);
+        }
+    }
+
+    @Override
+    public List<String> splitIntoSentences(String data) {
+        if (data == null || data.trim().isEmpty()){
+            throw new RuntimeException("content  = 0, nothing to split.");
+        }
+        String[] sentences = data.split("(?<=[.!?])\\s+");
+        List<String> result = new ArrayList<>();
+        for (String sentence : sentences ){
+            result.add(sentence);
+        }
+        return result;
+
+    }
+
+    @Override
+    public List<String> filterForWords(List<String> sentences) {
+        if (sentences == null || sentences.isEmpty()){
+            throw new RuntimeException("content  = 0, no words found");
+        }
+        List<String> allWords = new ArrayList<>();
+        for (String sentence : sentences){
+        String[] words = sentence.split("[\\s,.!?]+");
+        for (String word : words) {
+            allWords.add(word);
+        }
+        }
+        return allWords;
+    }
+
+    @Override
+    public int wordCount(List<String> text, String searchedWord) {
+        int countWords = 0;
+        for (String word : text){
+            if (word.equalsIgnoreCase(searchedWord)){
+                countWords++;
+            }
+        }
+        return countWords;
+    }
+
+    @Override
+    public void analyzer(String path, String word) {
+
+        
+    }
+
+
+    private static void validationWord(String searchedWord) {
+        if (searchedWord == null || searchedWord.isEmpty()) {
+            throw new IllegalArgumentException("searched word is null or empty");
+        }
+    }
+
+    private static void ValidationPath(String filePath) {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            throw new IllegalArgumentException("can't find file " + file);
         }
     }
 }

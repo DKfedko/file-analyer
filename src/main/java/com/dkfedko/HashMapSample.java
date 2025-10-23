@@ -1,5 +1,4 @@
 package com.dkfedko;
-import java.io.File;
 import java.util.HashMap;
 
 public class HashMapSample {

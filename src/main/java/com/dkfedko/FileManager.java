@@ -6,10 +6,9 @@ import java.nio.file.Path;
 
 public class FileManager {
 
-    public static int countFiles(String path) {
+    public int countFiles(String path) {
         File file = new File(path);
         int totalFilesCount = 0;
-
         try {
             File[] files = file.listFiles();
             if (files == null) {
@@ -24,14 +23,14 @@ public class FileManager {
             }
             return totalFilesCount;
         } catch (FileNotFoundException e) {
-            System.out.println("can't find file" + path);
+            System.out.println("can't find file" + path); //fix no sout!
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return 0;
     }
 
-    public static int countFolders(String path) {
+    public int countFolders(String path) {
         File folder = new File(path);
         int totalFoldersCounts = 0;
         try {
@@ -55,7 +54,7 @@ public class FileManager {
         return 0;
     }
 
-    public static void move(String from, String to) throws IOException {
+    public void move(String from, String to) throws IOException {
         try {
             String pathFrom = from;
             String pathTo = to;
@@ -65,7 +64,7 @@ public class FileManager {
         }
     }
 
-    public static void copy(String from, String to) throws IOException {
+    public void copy(String from, String to) throws IOException {
         try {
             String pathFrom = from;
             String pathTo = to;
@@ -75,7 +74,7 @@ public class FileManager {
         }
     }
 
-    public static void copyByIO(String from, String to) throws IOException {
+    public void copyByIO(String from, String to) throws IOException {
         try {
             FileInputStream inputStream = new FileInputStream(from);
             FileOutputStream outputStream = new FileOutputStream(to);
