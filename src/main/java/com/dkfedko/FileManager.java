@@ -2,56 +2,48 @@ package com.dkfedko;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 
 public class FileManager {
 
     public int countFiles(String path) {
+
         File file = new File(path);
         int totalFilesCount = 0;
-        try {
-            File[] files = file.listFiles();
-            if (files == null) {
-                throw new FileNotFoundException("Can't find file" + path);
-            }
-            for (File f : files) {
-                if (f.isFile()) {
+        if (!file.exists()) {
+            throw new RuntimeException("file is not exist");
+        }
+            File[] dataOfFiles = file.listFiles();
+            assert dataOfFiles != null;
+            for (File currentFile : dataOfFiles) {
+                if (currentFile.isFile()) {
                     totalFilesCount++;
-                } else if (f.isDirectory()) {
-                    totalFilesCount += countFiles(f.getAbsolutePath());
+                } else if (currentFile.isDirectory()) {
+                    totalFilesCount += countFiles(currentFile.getAbsolutePath());
                 }
             }
             return totalFilesCount;
-        } catch (FileNotFoundException e) {
-            System.out.println("can't find file" + path); //fix no sout!
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
-        return 0;
-    }
+
 
     public int countFolders(String path) {
         File folder = new File(path);
         int totalFoldersCounts = 0;
-        try {
-            File[] Folders = folder.listFiles();
-            if (Folders == null) {
-                throw new FileNotFoundException("Can't find folder");
+        if (!folder.exists()){
+            throw new RuntimeException("folder does not exist " + path);
+        }
+        totalFoldersCounts++;
+            File[] folders = folder.listFiles();
+            if (folders==null){
+                throw new RuntimeException("folder = null");
             }
-            for (File f : Folders) {
-                if (f.isDirectory()) {
-                    totalFoldersCounts++;
-                } else if (f.isDirectory()) {
-                    totalFoldersCounts += countFolders(f.getAbsolutePath());
+            for (File listOfFolders : folders) {
+                if (listOfFolders.isDirectory()) {
+                    totalFoldersCounts += countFolders(listOfFolders.getAbsolutePath());
                 }
             }
-            return totalFoldersCounts;
-        } catch (FileNotFoundException e) {
-            System.out.println("can't find folder");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return 0;
+        return totalFoldersCounts;
     }
 
     public void move(String from, String to) throws IOException {
@@ -78,12 +70,12 @@ public class FileManager {
         try {
             FileInputStream inputStream = new FileInputStream(from);
             FileOutputStream outputStream = new FileOutputStream(to);
-            int d;
-            while ((d = inputStream.read()) != -1) {
-                outputStream.write(d);
+            int data;
+            while ((data = inputStream.read()) != -1) {
+                outputStream.write(data);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("can't find file");
+            throw new RuntimeException("File is not fond can't");
         }
     }
 }
