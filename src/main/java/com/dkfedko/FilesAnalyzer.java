@@ -12,6 +12,6 @@ public interface FilesAnalyzer {
 
     int wordCount(List<String> text, String searchedWord);
 
-    void analyzer(String path, String  word);
+    void FileInformationAnalyzer (String path, String  word);
 
 }

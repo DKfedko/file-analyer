@@ -4,17 +4,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class FileManagerTest {
-    String path  = getClass().getClassLoader().getResource("fileTest").getFile();
-    String localPath   = "/home/dkfedko/Стільниця/fileTest";
+    String path  =  "src/test/resources/fileTest";
+
     @Test
     void shouldCountFiles() {
 
         FileManager fileManager = new FileManager();
 
-        assertNotNull(localPath);
-        assertFalse(localPath.isEmpty());
+        assertNotNull(path);
+        assertFalse(path.isEmpty());
 
-        int actual = fileManager.countFiles(localPath);
+        int actual = fileManager.countFiles(path);
         assertEquals(3, actual);
 
     }
@@ -24,22 +24,20 @@ public class FileManagerTest {
 
         FileManager fileManager = new FileManager();
 
-        assertNotNull(localPath);
-        assertFalse(localPath.isEmpty());
+        assertNotNull(path);
+        assertFalse(path.isEmpty());
 
-        int actual = fileManager.countFolders(localPath);
+        int actual = fileManager.countFolders(path);
         assertEquals(6, actual);
 
     }
+    @Test
+    void shouldMoveFiles(){
 
-//    @Test
-//    void shouldCopyFilesByIO(){
 
-//        File from = new File(String from);
-//        File to = new File(String to);
-//        //assert
 
-        //act
+
+    }
 
 
 //

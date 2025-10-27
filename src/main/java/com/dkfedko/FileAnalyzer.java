@@ -8,7 +8,7 @@ public class FileAnalyzer implements FilesAnalyzer {
 
     @Override
     public String readContent(String path) {
-        if (path ==null){
+        if (path == null) {
             throw new IllegalArgumentException("Path = null");
         }
         try (FileInputStream input = new FileInputStream(path)) {
@@ -26,13 +26,13 @@ public class FileAnalyzer implements FilesAnalyzer {
         if (data == null || data.trim().isEmpty()) {
             throw new RuntimeException("content  = 0, nothing to split.");
         }
+
         String[] sentences = data.split("(?<=[.!?])\\s+");
         List<String> result = new ArrayList<>();
         for (String sentence : sentences) {
             result.add(sentence);
         }
         return result;
-
     }
 
     @Override
@@ -62,7 +62,11 @@ public class FileAnalyzer implements FilesAnalyzer {
     }
 
     @Override
-    public void analyzer(String path, String word) {
+    public void FileInformationAnalyzer(String path, String word) {
+        String content = readContent(path);
+        List<String> sentences = splitIntoSentences(content);
+        List<String> sentencesWithWord  = splitIntoSentences(content);
+
     }
 
 
