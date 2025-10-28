@@ -62,11 +62,29 @@ public class FileAnalyzer implements FilesAnalyzer {
     }
 
     @Override
-    public void FileInformationAnalyzer(String path, String word) {
+    public void fileInformationAnalyzer(String path, String word) {
+
+        validationWord(word);
         String content = readContent(path);
         List<String> sentences = splitIntoSentences(content);
-        List<String> sentencesWithWord  = splitIntoSentences(content);
 
+        FileInformationAnalyzer fileInformationAnalyzer = new FileInformationAnalyzer(word);
+
+        for (String sentence : sentences) {
+            if (sentences.contains(word)) {
+                fileInformationAnalyzer.getSentences().add(sentence.trim());
+            }
+
+            String[] allWords = sentence.split("\\W+");
+            int wordCount = 0;
+            for (String words : allWords) {
+                if (words.equalsIgnoreCase(word)) {
+                    fileInformationAnalyzer.getWord();
+                    wordCount++;
+                }
+            }
+        }
+        fileInformationAnalyzer.getPrintResult();
     }
 
 

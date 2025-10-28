@@ -5,11 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class FileManagerTest {
     String path  =  "src/test/resources/fileTest";
+    FileManager fileManager = new FileManager();
 
     @Test
     void shouldCountFiles() {
-
-        FileManager fileManager = new FileManager();
 
         assertNotNull(path);
         assertFalse(path.isEmpty());
@@ -21,8 +20,6 @@ public class FileManagerTest {
 
     @Test
     void shouldCountFolders()  {
-
-        FileManager fileManager = new FileManager();
 
         assertNotNull(path);
         assertFalse(path.isEmpty());

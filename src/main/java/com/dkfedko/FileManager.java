@@ -59,7 +59,7 @@ public class FileManager {
         }
     }
 
-    public void copy(String from, String to) {
+    public void copy (String from, String to) {
         try {
             String pathFrom = from;
             String pathTo = to;
@@ -73,7 +73,7 @@ public class FileManager {
         }
     }
 
-    public void copyByIO(String from, String to) {
+    public void copyByIO (String from, String to) {
         try (FileInputStream inputStream = new FileInputStream(from);
              FileOutputStream outputStream = new FileOutputStream(to)) {
             int data;

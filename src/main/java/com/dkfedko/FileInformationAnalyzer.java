@@ -24,4 +24,7 @@ public class FileInformationAnalyzer {
     public List<String> getSentences() {
         return sentencesList;
     }
+    public void getPrintResult(){
+        System.out.println(word + count + sentencesList);
+    }
 }

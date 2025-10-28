@@ -100,7 +100,6 @@ public class FileAnalyzerTest {
     void shouldShowFileAnalyzerInformation(){
 
 
-
     }
 
 }
