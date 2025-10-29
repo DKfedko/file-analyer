@@ -1,12 +1,14 @@
 package com.dkfedko;
+
+import com.dkfedko.fileanaluzer.FileAnalyzer;
+import com.dkfedko.fileanaluzer.FileInformationAnalyzer;
 import org.junit.jupiter.api.Test;
 
-import java.security.spec.ECField;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class FileAnalyzerTest {
+class FileAnalyzerTest {
     FileAnalyzer fileAnalyzer = new FileAnalyzer();
     String path = "src/test/resources/story.txt";
     String wrongPath = "src/test/resources/Duck-story.txt";
@@ -14,7 +16,7 @@ public class FileAnalyzerTest {
     @Test
     void shouldReadContent() {
         //arrange
-        String dataFile  = fileAnalyzer.readContent(path);
+        String dataFile = fileAnalyzer.readContent(path);
 
         //assert
         assertNotNull(path);
@@ -27,8 +29,8 @@ public class FileAnalyzerTest {
     }
 
     @Test
-    void shouldThrowFileNotFindException (){
-        Exception exception = assertThrows(RuntimeException.class, () ->{
+    void shouldThrowFileNotFindException() {
+        Exception exception = assertThrows(RuntimeException.class, () -> {
             fileAnalyzer.readContent(wrongPath);
         });
         String expected = "can't find file: ";
@@ -37,7 +39,7 @@ public class FileAnalyzerTest {
     }
 
     @Test
-    void shouldSplitIntoSentences(){
+    void shouldSplitIntoSentences() {
         //arrange
         String dataFile = fileAnalyzer.readContent(path);
         List<String> sentences = fileAnalyzer.splitIntoSentences(dataFile);
@@ -58,8 +60,9 @@ public class FileAnalyzerTest {
         assertFalse(sentences.contains(notExpected));
 
     }
+
     @Test
-    void shouldFilterWords(){
+    void shouldFilterWords() {
         //assert
         String dataFile = fileAnalyzer.readContent(path);
         List<String> sentences = fileAnalyzer.splitIntoSentences(dataFile);
@@ -79,8 +82,9 @@ public class FileAnalyzerTest {
         assertFalse(word.contains(wordNotExpected));
 
     }
+
     @Test
-    void shouldCountWords(){
+    void shouldCountWords() {
         //assert
         String dataFile = fileAnalyzer.readContent(path);
         List<String> sentences = fileAnalyzer.splitIntoSentences(dataFile);
@@ -92,14 +96,25 @@ public class FileAnalyzerTest {
 
         assertEquals(actual, expected);
 
-        assertTrue(expected>0);
+        assertTrue(expected > 0);
         assertNotEquals(7, expected);
 
     }
+
     @Test
-    void shouldShowFileAnalyzerInformation(){
+    void shouldShowFileAnalyzerInformation() {
+        // when
+        FileInformationAnalyzer info = fileAnalyzer.fileInformationAnalyzer(path, "test");
 
+        // then
+        assertNotNull(info, "Analyzer result should not be null");
+        assertEquals("test", info.getWord(), "Word should match the searched one");
+        assertEquals(1, info.getCount(), "Count should be 1 for word 'test'");
 
+        List<String> sentences = info.getSentencesList();
+        assertNotNull(sentences, "Sentences list should not be null");
+        assertFalse(sentences.isEmpty(), "Sentences list should not be empty");
+
+        assertTrue(sentences.contains("test"), "Sentences list should contain the word 'test'");
     }
-
 }

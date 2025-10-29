@@ -1,10 +1,26 @@
-package com.dkfedko;
+package com.dkfedko.fileanaluzer;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileAnalyzer implements FilesAnalyzer {
+
+    @Override
+    public FileInformationAnalyzer fileInformationAnalyzer(String path, String word) {
+        validationWord(word);
+        validationPath(path);
+
+        String content = readContent(path);
+        List<String> sentences = splitIntoSentences(content);
+
+        List<String> strings = filterForWords(sentences);
+        int count = wordCount(strings, word);
+
+        FileInformationAnalyzer info = new FileInformationAnalyzer(word, count, strings);
+        return info;
+    }
 
     @Override
     public String readContent(String path) {
@@ -61,32 +77,6 @@ public class FileAnalyzer implements FilesAnalyzer {
         return countWords;
     }
 
-    @Override
-    public void fileInformationAnalyzer(String path, String word) {
-
-        validationWord(word);
-        String content = readContent(path);
-        List<String> sentences = splitIntoSentences(content);
-
-        FileInformationAnalyzer fileInformationAnalyzer = new FileInformationAnalyzer(word);
-
-        for (String sentence : sentences) {
-            if (sentences.contains(word)) {
-                fileInformationAnalyzer.getSentences().add(sentence.trim());
-            }
-
-            String[] allWords = sentence.split("\\W+");
-            int wordCount = 0;
-            for (String words : allWords) {
-                if (words.equalsIgnoreCase(word)) {
-                    fileInformationAnalyzer.getWord();
-                    wordCount++;
-                }
-            }
-        }
-        fileInformationAnalyzer.getPrintResult();
-    }
-
 
     private static void validationWord(String searchedWord) {
         if (searchedWord == null || searchedWord.isEmpty()) {
@@ -94,7 +84,7 @@ public class FileAnalyzer implements FilesAnalyzer {
         }
     }
 
-    private static void ValidationPath(String filePath) {
+    private static void validationPath(String filePath) {
         File file = new File(filePath);
         if (!file.exists()) {
             throw new IllegalArgumentException("can't find file " + file);
