@@ -1,4 +1,4 @@
-package com.dkfedko;
+package com.dkfedko.fileanaluzer;
 
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -12,6 +12,6 @@ public interface FilesAnalyzer {
 
     int wordCount(List<String> text, String searchedWord);
 
-    void fileInformationAnalyzer(String path, String  word);
+    FileInformationAnalyzer fileInformationAnalyzer(String path, String  word);
 
 }
