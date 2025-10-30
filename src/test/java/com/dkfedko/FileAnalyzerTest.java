@@ -63,7 +63,7 @@ class FileAnalyzerTest {
 
     @Test
     void shouldFilterWords() {
-        //assert
+        //arrange
         String dataFile = fileAnalyzer.readContent(path);
         List<String> sentences = fileAnalyzer.splitIntoSentences(dataFile);
         List<String> word = fileAnalyzer.filterForWords(sentences);
@@ -105,11 +105,19 @@ class FileAnalyzerTest {
     void shouldShowFileAnalyzerInformation() {
         // when
         FileInformationAnalyzer info = fileAnalyzer.fileInformationAnalyzer(path, "test");
+        FileInformationAnalyzer infoJava = fileAnalyzer.fileInformationAnalyzer(path, "java");
+        FileInformationAnalyzer lookForDuck = fileAnalyzer.fileInformationAnalyzer(path, "duck");
+        infoJava.toString();
+        lookForDuck.toString();
+
+//        System.out.println(infoJava);
+        System.out.println(lookForDuck);
 
         // then
         assertNotNull(info, "Analyzer result should not be null");
         assertEquals("test", info.getWord(), "Word should match the searched one");
-        assertEquals(1, info.getCount(), "Count should be 1 for word 'test'");
+        assertEquals("duck", lookForDuck.getWord(), "Word should match the searched one");
+        assertEquals(4, lookForDuck.getCount(), "Count should be 1 for word 'test'");
 
         List<String> sentences = info.getSentencesList();
         assertNotNull(sentences, "Sentences list should not be null");

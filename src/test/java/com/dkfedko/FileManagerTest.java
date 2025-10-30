@@ -28,21 +28,17 @@ public class FileManagerTest {
         assertEquals(6, actual);
 
     }
+
     @Test
     void shouldMoveFiles(){
 
 
-
-
-    }
-
-
-//
+//    }
 //    }
 //    @Test
 //    void shouldMoveFiles(){
 //
 //
-//    }
+    }
 //
 }
