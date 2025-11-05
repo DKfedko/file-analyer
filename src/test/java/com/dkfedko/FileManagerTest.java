@@ -32,22 +32,20 @@ public class FileManagerTest {
 
     }
 
-//    @Test
-//    void shouldMoveFiles() {
-//
-//        String from = "src/test/resources/fileTest/2";
-//        String to = "fileTest/story/input_output_stream_folder";
-//
-//
-//        fileManager.move(from, to);
-//
-//    }
-//
+    @Test
+    void shouldMoveFiles() {
+
+        String from = "src/test/resources/test-dir1/test-dir1_2";
+        String to = "src/test/resources/test-dir2";
+        fileManager.move(from, to);
+
+    }
+
     @Test
     void shouldCopyFile() {
 
-        String from = "src/test/resources/input_output_stream_folder/input_folder/CV.txt";
-        String to = "src/test/resources/input_output_stream_folder/outputfolder";
+        String from = "src/test/resources/test-dir1/testFile1.txt";
+        String to = "src/test/resources/test-dir1/test-dir1_2/testFile1.txt";
 
         fileManager.copy(from, to);
 

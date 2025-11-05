@@ -60,11 +60,8 @@ public class FileManager {
             Path source = Path.of(from);
             Path target = Path.of(to);
 
-            Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+            Files.move(source, target, StandardCopyOption.REPLACE_EXISTING);
 
-                String pathFrom = from;
-                String pathTo = to;
-                Files.move(Path.of(pathFrom), Path.of(pathTo));
             } catch (AccessDeniedException e) {
                 System.out.println("access denied to " + from);
             } catch (FileNotFoundException e) {
@@ -77,14 +74,16 @@ public class FileManager {
     public void copy (String from, String to) {
 
         try {
-                Path pathFrom = Path.of(from);
-                Path pathTo = Path.of(to);
+            Path pathFrom = Path.of(from);
+            Path pathTo = Path.of(to);
+
                 Files.copy(pathFrom, pathTo, StandardCopyOption.REPLACE_EXISTING);
-            } catch (NoSuchFileException e) {
-                throw new RuntimeException ("Can't find file: " + from);
-            } catch (AccessDeniedException e) {
-            throw new RuntimeException("Access to file is denied: " + from);
-            } catch (IOException e) {
+
+            } catch(NoSuchFileException e){
+                throw new RuntimeException("Can't find file: " + from);
+            } catch(AccessDeniedException e){
+                throw new RuntimeException("Access to file is denied: " + from);
+            } catch(IOException e){
                 throw new RuntimeException("can't copy: " + e.getMessage());
             }
         }
