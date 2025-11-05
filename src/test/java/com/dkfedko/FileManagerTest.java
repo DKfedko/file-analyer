@@ -11,17 +11,6 @@ public class FileManagerTest {
     FileManager fileManager = new FileManager();
 
     @Test
-    void shouldCountFiles() {
-
-        assertNotNull(path);
-        assertFalse(path.isEmpty());
-
-        int actual = fileManager.countFiles(path);
-        assertEquals(5, actual);
-
-    }
-
-    @Test
     void shouldCountFolders() {
 
         assertNotNull(path);
@@ -60,6 +49,18 @@ public class FileManagerTest {
         fileManager.copyByIO(from, to);
 
     }
+
+    @Test
+    void shouldCountFiles() {
+
+        assertNotNull(path);
+        assertFalse(path.isEmpty());
+
+        int actual = fileManager.countFiles(path);
+        assertEquals(7, actual);
+
+    }
+
     @Test
     void shouldCreateDirectoryCheckAndDelete(){
 
