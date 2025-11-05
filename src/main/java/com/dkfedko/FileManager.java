@@ -1,9 +1,7 @@
 package com.dkfedko;
 
 import java.io.*;
-import java.nio.file.AccessDeniedException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.*;
 
 public class FileManager {
 
@@ -59,31 +57,38 @@ public class FileManager {
 
     public void move (String from, String to) {
         try {
-            String pathFrom = from;
-            String pathTo = to;
-            Files.move(Path.of(pathFrom), Path.of(pathTo));
-        } catch (AccessDeniedException e) {
-            System.out.println("access denied to " + from);
-        } catch (FileNotFoundException e) {
-            System.out.println("can't find file");
-        } catch (IOException e) {
-            throw new RuntimeException("can't read file");
-        }
+            Path source = Path.of(from);
+            Path target = Path.of(to);
+
+            Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+
+                String pathFrom = from;
+                String pathTo = to;
+                Files.move(Path.of(pathFrom), Path.of(pathTo));
+            } catch (AccessDeniedException e) {
+                System.out.println("access denied to " + from);
+            } catch (FileNotFoundException e) {
+                System.out.println("can't find file");
+            } catch (IOException e) {
+                throw new RuntimeException("can't read file");
+            }
     }
 
     public void copy (String from, String to) {
+
         try {
-            String pathFrom = from;
-            String pathTo = to;
-            Files.copy(Path.of(pathFrom), Path.of(pathTo));
-        } catch (AccessDeniedException e) {
-            System.out.println("access denied to " + from);
-        } catch (FileNotFoundException e) {
-            System.out.println("can't find file");
-        } catch (IOException e) {
-            throw new RuntimeException("can't read file");
+                Path pathFrom = Path.of(from);
+                Path pathTo = Path.of(to);
+                Files.copy(pathFrom, pathTo, StandardCopyOption.REPLACE_EXISTING);
+            } catch (NoSuchFileException e) {
+                throw new RuntimeException ("Can't find file: " + from);
+            } catch (AccessDeniedException e) {
+            throw new RuntimeException("Access to file is denied: " + from);
+            } catch (IOException e) {
+                throw new RuntimeException("can't copy: " + e.getMessage());
+            }
         }
-    }
+
 
     public void copyByIO (String from, String to) {
         try (FileInputStream inputStream = new FileInputStream(from);

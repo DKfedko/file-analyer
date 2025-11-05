@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FileAnalyzerTest {
     FileAnalyzer fileAnalyzer = new FileAnalyzer();
-    String path = "src/test/resources/story.txt";
-    String wrongPath = "src/test/resources/Duck-story.txt";
+    String path = "src/test/resources/duck_story.txt";
+    String wrongPath = "src/test/resources/Duck-duck_story.txt";
 
     @Test
     void shouldReadContent() {

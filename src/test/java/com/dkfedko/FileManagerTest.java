@@ -17,7 +17,7 @@ public class FileManagerTest {
         assertFalse(path.isEmpty());
 
         int actual = fileManager.countFiles(path);
-        assertEquals(6, actual);
+        assertEquals(5, actual);
 
     }
 
@@ -43,15 +43,15 @@ public class FileManagerTest {
 //
 //    }
 //
-//    @Test
-//    void shouldCopyFile() {
-//
-//        String from = "src/test/resources/fileTest/input_output_stream_folder/input_folder/CV.txt";
-//        String to = "src/test/resources/fileTest/input_output_stream_folder/outputfolder";
-//
-//        fileManager.copy(from, to);
-//
-//    }
+    @Test
+    void shouldCopyFile() {
+
+        String from = "src/test/resources/input_output_stream_folder/input_folder/CV.txt";
+        String to = "src/test/resources/input_output_stream_folder/outputfolder";
+
+        fileManager.copy(from, to);
+
+    }
 //
 //    @Test
 //    void shouldCopyFileUsingIO() {
@@ -62,4 +62,16 @@ public class FileManagerTest {
 //        fileManager.copyByIO(from, to);
 //
 //    }
+    @Test
+    void shouldCreateDirectoryCheckAndDelete(){
+
+        File file = new File("dir1");
+
+        boolean create = file.mkdirs();
+        if (!file.exists()){
+            throw new RuntimeException("could not create directory ");
+        }
+
+    }
+
 }
