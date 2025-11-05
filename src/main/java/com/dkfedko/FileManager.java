@@ -10,12 +10,19 @@ public class FileManager {
     public int countFiles(String path) {
 
         File file = new File(path);
-        int totalFilesCount = 0;
         if (!file.exists()) {
             throw new RuntimeException("file is not exist");
         }
+        if (!file.isDirectory()){
+            throw new RuntimeException("this is not a file ");
+        }
+
+        int totalFilesCount = 0;
+
         File[] dataOfFiles = file.listFiles();
-        assert dataOfFiles != null;
+        if (file == null){
+            return totalFilesCount;
+        }
         for (File currentFile : dataOfFiles) {
             if (currentFile.isFile()) {
                 totalFilesCount++;
@@ -28,14 +35,19 @@ public class FileManager {
 
     public int countFolders(String path) {
         File folder = new File(path);
-        int totalFoldersCounts = 0;
+
         if (!folder.exists()) {
             throw new RuntimeException("folder does not exist " + path);
         }
-        totalFoldersCounts++;
+        if (!folder.isDirectory()){
+            throw new RuntimeException("not a folder: " + path);
+        }
+
+        int totalFoldersCounts = 1;
+
         File[] folders = folder.listFiles();
         if (folders == null) {
-            throw new RuntimeException("folder = null");
+            return totalFoldersCounts;
         }
         for (File listOfFolders : folders) {
             if (listOfFolders.isDirectory()) {
@@ -81,7 +93,7 @@ public class FileManager {
                 outputStream.write(data);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error copy file");
+            throw new RuntimeException("Error copy file", e);
         }
     }
 }

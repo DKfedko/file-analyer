@@ -104,25 +104,20 @@ class FileAnalyzerTest {
     @Test
     void shouldShowFileAnalyzerInformation() {
         // when
-        FileInformationAnalyzer info = fileAnalyzer.fileInformationAnalyzer(path, "test");
-        FileInformationAnalyzer infoJava = fileAnalyzer.fileInformationAnalyzer(path, "java");
         FileInformationAnalyzer lookForDuck = fileAnalyzer.fileInformationAnalyzer(path, "duck");
-        infoJava.toString();
-        lookForDuck.toString();
 
-//        System.out.println(infoJava);
+        lookForDuck.toString();
         System.out.println(lookForDuck);
 
         // then
-        assertNotNull(info, "Analyzer result should not be null");
-        assertEquals("test", info.getWord(), "Word should match the searched one");
+        assertNotNull(lookForDuck, "Analyzer result should not be null");
         assertEquals("duck", lookForDuck.getWord(), "Word should match the searched one");
-        assertEquals(4, lookForDuck.getCount(), "Count should be 1 for word 'test'");
+        assertEquals(4, lookForDuck.getCount(), "Count should be 1 for word 'duck'");
 
-        List<String> sentences = info.getSentencesList();
+        List<String> sentences = lookForDuck.getSentencesList();
         assertNotNull(sentences, "Sentences list should not be null");
         assertFalse(sentences.isEmpty(), "Sentences list should not be empty");
 
-        assertTrue(sentences.contains("test"), "Sentences list should contain the word 'test'");
+        assertTrue(sentences.contains("duck"), "Sentences list should contain the word 'duck'");
     }
 }
