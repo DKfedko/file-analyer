@@ -33,15 +33,6 @@ public class FileManagerTest {
     }
 
     @Test
-    void shouldMoveFiles() {
-
-        String from = "src/test/resources/test-dir1/test-dir1_2";
-        String to = "src/test/resources/test-dir2";
-        fileManager.move(from, to);
-
-    }
-
-    @Test
     void shouldCopyFile() {
 
         String from = "src/test/resources/test-dir1/testFile1.txt";
@@ -50,16 +41,25 @@ public class FileManagerTest {
         fileManager.copy(from, to);
 
     }
-//
-//    @Test
-//    void shouldCopyFileUsingIO() {
-//
-//        String from = "src/test/resources/fileTest/input_output_stream_folder/input_folder/CV.txt";
-//        String to = "src/test/resources/fileTest/input_output_stream_folder/outputfolder/CV.txt";
-//
-//        fileManager.copyByIO(from, to);
-//
-//    }
+
+    @Test
+    void shouldMoveFiles() {
+
+        String from = "src/test/resources/test-dir1/test-dir1_2/testFile1.txt";
+        String to = "src/test/resources/test-dir2/test-dir2_1/testFile1.txt";
+        fileManager.move(from, to);
+    }
+
+
+    @Test
+    void shouldCopyFileUsingIO() {
+
+        String from = "src/test/resources/test-dir1/testFile1.txt";
+        String to = "src/test/resources/test-dir1/test-dir1_2/testFile1.txt";
+
+        fileManager.copyByIO(from, to);
+
+    }
     @Test
     void shouldCreateDirectoryCheckAndDelete(){
 

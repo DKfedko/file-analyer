@@ -60,7 +60,7 @@ public class FileManager {
             Path source = Path.of(from);
             Path target = Path.of(to);
 
-            Files.move(source, target, StandardCopyOption.REPLACE_EXISTING);
+            Files.move(source, target);
 
             } catch (AccessDeniedException e) {
                 System.out.println("access denied to " + from);
