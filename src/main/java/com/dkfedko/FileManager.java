@@ -62,13 +62,13 @@ public class FileManager {
 
             Files.move(source, target);
 
-            } catch (AccessDeniedException e) {
-                System.out.println("access denied to " + from);
-            } catch (FileNotFoundException e) {
-                System.out.println("can't find file");
-            } catch (IOException e) {
-                throw new RuntimeException("can't read file");
-            }
+        } catch(NoSuchFileException e){
+            throw new RuntimeException("Can't find file: " + from);
+        } catch(AccessDeniedException e){
+            throw new RuntimeException("Access to file is denied: " + from);
+        } catch(IOException e){
+            throw new RuntimeException("can't copy: " + e.getMessage());
+        }
     }
 
     public void copy (String from, String to) {
