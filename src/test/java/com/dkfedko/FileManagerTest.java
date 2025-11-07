@@ -18,7 +18,6 @@ public class FileManagerTest {
 
         int actual = fileManager.countFolders(path);
         assertEquals(4, actual);
-
     }
 
     @Test
@@ -70,7 +69,6 @@ public class FileManagerTest {
 
         int actual = fileManager.countFiles(path);
         assertEquals(3, actual);
-
     }
 
     @Test
@@ -100,6 +98,43 @@ public class FileManagerTest {
             assertTrue(file1_1.exists() || file1_1.createNewFile());
             assertTrue(file1_2.exists() || file1_2.createNewFile());
             assertTrue(file2.exists() || file2.createNewFile());
+
+            assertTrue(dir1.isDirectory());
+            assertTrue(dir1_1.isDirectory());
+            assertTrue(dir1_2.isDirectory());
+            assertTrue(dir2.isDirectory());
+            assertTrue(dir3.isDirectory());
+
+            assertTrue(file0.isFile());
+            assertTrue(file1.isFile());
+            assertTrue(file1_1.isFile());
+            assertTrue(file1_2.isFile());
+            assertTrue(file2.isFile());
+
+            file0.delete();
+            file1.delete();
+            file1_1.delete();
+            file1_2.delete();
+            file2.delete();
+
+            dir3.delete();
+            dir2.delete();
+            dir1_2.delete();
+            dir1_1.delete();
+            dir1.delete();
+
+            assertFalse(dir1.exists());
+            assertFalse(dir1_1.exists());
+            assertFalse(dir1_2.exists());
+            assertFalse(dir2.exists());
+            assertFalse(dir3.exists());
+
+            assertFalse(file0.exists());
+            assertFalse(file1.exists());
+            assertFalse(file1_1.exists());
+            assertFalse(file1_2.exists());
+            assertFalse(file2.exists());
+
         }
         catch (IOException e) {
             throw new RuntimeException("can't create directory", e);
